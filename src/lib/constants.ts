@@ -14,6 +14,7 @@ export const SERVICES = [
   {
     title: "1-page Website",
     price: "PKR 8k+",
+    iconType: "Check",
     features: [
       "WhatsApp button integration",
       "Mobile responsive design",
@@ -24,6 +25,7 @@ export const SERVICES = [
   {
     title: "Business Website (3–5 pages)",
     price: "PKR 15k+",
+    iconType: "Check",
     features: [
       "Contact form integration",
       "Mobile responsive design",
@@ -34,11 +36,24 @@ export const SERVICES = [
   {
     title: "Fix / Redesign",
     price: "PKR 5k+",
+    iconType: "Check",
     features: [
       "Performance optimization",
       "Mobile responsiveness fixes",
       "Design improvements",
       "Quick turnaround (24-72h delivery)"
+    ]
+  },
+  {
+    title: "Custom Website",
+    price: "PKR 25k+",
+    iconType: "Palette",
+    features: [
+      "Tailored to your specific requirements",
+      "Advanced functionality & integrations",
+      "Custom design & branding",
+      "Full project consultation",
+      "Unlimited revisions & support"
     ]
   }
 ] as const;

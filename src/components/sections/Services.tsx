@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { variants } from "@/lib/animations";
-import { Check, MessageCircle } from "lucide-react";
+import { Check, MessageCircle, Palette, Sparkles } from "lucide-react";
 import { SERVICES, CONTACT } from "@/lib/constants";
 
 export function Services() {
@@ -27,7 +27,7 @@ export function Services() {
 
         <motion.div 
           variants={variants.fadeInUp}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full"
+          className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-8 w-full"
         >
           {SERVICES.map((service, index) => (
             <motion.div
@@ -36,11 +36,38 @@ export function Services() {
               whileHover={{ y: -8 }}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
-              <div className="relative bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 h-full hover:border-white/20 transition-all duration-300">
+              <div 
+                className={`absolute inset-0 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100 ${
+                  service.title === "Custom Website" 
+                    ? "bg-gradient-to-r from-purple-500/30 to-pink-500/30" 
+                    : "bg-gradient-to-r from-accent/20 to-purple-500/20"
+                }`} 
+              />
+              <div 
+                className={`relative bg-black/40 backdrop-blur-xl border rounded-2xl p-8 h-full transition-all duration-300 ${
+                  service.title === "Custom Website"
+                    ? "border-purple-400/40 shadow-purple-500/30 hover:border-purple-400/60"
+                    : "border-white/10 hover:border-white/20"
+                }`}
+              >
                 <div className="text-center mb-6">
+                  <div className="flex justify-center mb-4">
+                    <div className={`p-3 rounded-full ${
+                      service.title === "Custom Website"
+                        ? "bg-purple-500/20 text-purple-400"
+                        : "bg-accent/20 text-accent"
+                    }`}>
+                      {service.iconType === "Palette" ? (
+                        <Palette size={20} />
+                      ) : (
+                        <Check size={20} />
+                      )}
+                    </div>
+                  </div>
                   <h3 className="text-2xl font-bold text-white mb-2">{service.title}</h3>
-                  <div className="text-3xl font-bold text-accent">{service.price}</div>
+                  <div className={`text-3xl font-bold ${
+                    service.title === "Custom Website" ? "text-purple-400" : "text-accent"
+                  }`}>{service.price}</div>
                 </div>
                 
                 <ul className="space-y-3 mb-8">
