@@ -1,7 +1,7 @@
 // Contact configuration - update in one place only
 export const CONTACT = {
   whatsapp: {
-    number: "+923012345678", // Replace with actual WhatsApp number
+    number: "+923135959079", // Replace with actual WhatsApp number
     message: "Hi! I'm interested in your web development services."
   },
   email: "sajidnadeem2020@gmail.com",

@@ -22,7 +22,7 @@ export function Testimonials() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={variants.fadeInUp}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full"
         >
@@ -38,7 +38,7 @@ export function Testimonials() {
                 <div className="flex items-center mb-4">
                   <Quote className="text-accent/30" size={16} />
                 </div>
-                
+
                 <blockquote className="text-white mb-6 leading-relaxed">
                   "{testimonial.content}"
                 </blockquote>
@@ -48,7 +48,7 @@ export function Testimonials() {
                     <div className="font-semibold text-white">{testimonial.name}</div>
                     <div className="text-sm text-secondary">{testimonial.role}</div>
                   </div>
-                  
+
                   <div className="flex gap-1">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="text-yellow-400 fill-current" size={16} />
@@ -60,11 +60,7 @@ export function Testimonials() {
           ))}
         </motion.div>
 
-        <motion.div variants={variants.fadeInUp} className="text-center">
-          <p className="text-sm text-accent/70 font-medium">
-            (Sample) - Replace with real client testimonials
-          </p>
-        </motion.div>
+
       </motion.div>
     </section>
   );
