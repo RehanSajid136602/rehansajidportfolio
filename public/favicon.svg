@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="iconGrad" x1="8" y1="8" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="0.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="url(#bgGrad)"/>
+  
+  <!-- Main Icon - Abstract "R" with tech aesthetic -->
+  <g filter="url(#glow)">
+    <!-- Vertical bar -->
+    <rect x="10" y="9" width="2.5" height="14" rx="1.25" fill="url(#iconGrad)"/>
+    
+    <!-- Top curve -->
+    <path d="M12.5 9 C12.5 9, 18 9, 18 13 C18 15, 16 16, 14 16" 
+          stroke="url(#iconGrad)" 
+          stroke-width="2.5" 
+          stroke-linecap="round" 
+          fill="none"/>
+    
+    <!-- Diagonal leg -->
+    <path d="M14 16 L18 23" 
+          stroke="url(#iconGrad)" 
+          stroke-width="2.5" 
+          stroke-linecap="round"/>
+    
+    <!-- Tech accent dots -->
+    <circle cx="20" cy="11" r="1" fill="#60a5fa" opacity="0.8"/>
+    <circle cx="22" cy="14" r="0.8" fill="#3b82f6" opacity="0.6"/>
+    <circle cx="20" cy="20" r="1" fill="#2563eb" opacity="0.8"/>
+  </g>
+  
+  <!-- Subtle border -->
+  <rect width="32" height="32" rx="6" fill="none" stroke="rgba(96, 165, 250, 0.1)" stroke-width="0.5"/>
+</svg>
