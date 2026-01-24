@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Rocket, Code, Cpu, ChevronRight, ChevronLeft, Terminal, Zap } from "lucide-react";
+import { safeStats, timelineAdditions } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 // Mission data types
@@ -110,6 +111,8 @@ const missions: Mission[] = [
     technologies: ["Framer Motion", "Canvas", "GSAP"],
   },
 ];
+
+const allMissions = [...missions, ...timelineAdditions];
 
 const typeConfig = {
   training: { color: "#3b82f6", icon: Terminal, label: "Training" },
@@ -379,11 +382,6 @@ export function Experience() {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
-  // Calculate stats
-  const completedMissions = missions.filter(m => m.status === "COMPLETED").length;
-  const totalTech = [...new Set(missions.flatMap(m => m.technologies))].length;
-  const yearsActive = new Date().getFullYear() - 2022;
-
   return (
     <section 
       id="experience" 
@@ -412,31 +410,21 @@ export function Experience() {
           </p>
 
           {/* Stats Panel */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.3 }}
             className="flex gap-8 mt-8 p-4 rounded-xl bg-white/[0.02] border border-white/5 w-fit"
           >
-            <div className="text-center">
-              <div className="text-2xl font-bold text-accent">{completedMissions}</div>
-              <div className="text-[10px] uppercase tracking-wider text-secondary">Completed</div>
-            </div>
-            <div className="w-px bg-white/10" />
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">1</div>
-              <div className="text-[10px] uppercase tracking-wider text-secondary">Active</div>
-            </div>
-            <div className="w-px bg-white/10" />
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400">{totalTech}</div>
-              <div className="text-[10px] uppercase tracking-wider text-secondary">Technologies</div>
-            </div>
-            <div className="w-px bg-white/10" />
-            <div className="text-center">
-              <div className="text-2xl font-bold text-white">{yearsActive}+</div>
-              <div className="text-[10px] uppercase tracking-wider text-secondary">Years</div>
-            </div>
+            {safeStats.map((stat, index) => (
+              <div key={stat.label} className="flex items-center gap-8">
+                <div className="text-center">
+                  <div className={`text-2xl font-bold ${stat.toneClass}`}>{stat.value}</div>
+                  <div className="text-[10px] uppercase tracking-wider text-secondary">{stat.label}</div>
+                </div>
+                {index < safeStats.length - 1 && <div className="w-px bg-white/10" />}
+              </div>
+            ))}
           </motion.div>
         </motion.div>
 
@@ -479,11 +467,11 @@ export function Experience() {
             style={{ width: "100%", height: "100%", overflow: "visible" }}
           >
             <defs>
-              {missions.map((_, i) => (
+              {allMissions.map((_, i) => (
                 <linearGradient key={i} id={`gradient-${i}`} x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor={typeConfig[missions[i].type].color} stopOpacity="0.6" />
+                  <stop offset="0%" stopColor={typeConfig[allMissions[i].type].color} stopOpacity="0.6" />
                   <stop offset="50%" stopColor="white" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor={typeConfig[missions[Math.min(i + 1, missions.length - 1)].type].color} stopOpacity="0.6" />
+                  <stop offset="100%" stopColor={typeConfig[allMissions[Math.min(i + 1, allMissions.length - 1)].type].color} stopOpacity="0.6" />
                 </linearGradient>
               ))}
             </defs>
@@ -519,9 +507,9 @@ export function Experience() {
             className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide relative"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {missions.map((mission, index) => (
-              <MissionCard 
-                key={mission.id} 
+            {allMissions.map((mission, index) => (
+              <MissionCard
+                key={mission.id}
                 mission={mission} 
                 index={index}
                 isInView={isInView}

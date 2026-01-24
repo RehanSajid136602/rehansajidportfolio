@@ -3,16 +3,16 @@ import { useEffect, useRef, useCallback } from "react";
 /**
  * Throttle function calls to improve performance
  */
-export function useThrottle<T extends (...args: any[]) => any>(
+export function useThrottle<T extends (...args: unknown[]) => unknown>(
   callback: T,
   delay: number
 ): T {
-  const lastRun = useRef(Date.now());
+  const lastRun = useRef<number | null>(null);
 
   return useCallback(
     (...args: Parameters<T>) => {
       const now = Date.now();
-      if (now - lastRun.current >= delay) {
+      if (lastRun.current === null || now - lastRun.current >= delay) {
         lastRun.current = now;
         return callback(...args);
       }
@@ -24,7 +24,7 @@ export function useThrottle<T extends (...args: any[]) => any>(
 /**
  * Debounce function calls
  */
-export function useDebounce<T extends (...args: any[]) => any>(
+export function useDebounce<T extends (...args: unknown[]) => unknown>(
   callback: T,
   delay: number
 ): T {
@@ -54,25 +54,28 @@ export function useDebounce<T extends (...args: any[]) => any>(
 /**
  * Request animation frame hook for smooth animations
  */
-export function useAnimationFrame(callback: (deltaTime: number) => void, deps: any[] = []) {
+export function useAnimationFrame(
+  callback: (deltaTime: number) => void
+) {
   const requestRef = useRef<number | undefined>(undefined);
   const previousTimeRef = useRef<number | undefined>(undefined);
-
-  const animate = useCallback((time: number) => {
-    if (previousTimeRef.current !== undefined) {
-      const deltaTime = time - previousTimeRef.current;
-      callback(deltaTime);
-    }
-    previousTimeRef.current = time;
-    requestRef.current = requestAnimationFrame(animate);
-  }, [callback]);
+  const animateRef = useRef<(time: number) => void>();
 
   useEffect(() => {
-    requestRef.current = requestAnimationFrame(animate);
+    animateRef.current = (time: number) => {
+      if (previousTimeRef.current !== undefined) {
+        const deltaTime = time - previousTimeRef.current;
+        callback(deltaTime);
+      }
+      previousTimeRef.current = time;
+      requestRef.current = requestAnimationFrame(animateRef.current!);
+    };
+
+    requestRef.current = requestAnimationFrame(animateRef.current);
     return () => {
       if (requestRef.current) {
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, [animate, ...deps]);
+  }, [callback]);
 }

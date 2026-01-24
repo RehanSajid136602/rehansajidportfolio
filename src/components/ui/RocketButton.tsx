@@ -7,9 +7,10 @@ import confetti from "canvas-confetti";
 
 interface RocketButtonProps {
   email: string;
+  label?: string;
 }
 
-export function RocketButton({ email }: RocketButtonProps) {
+export function RocketButton({ email, label = "Copy email" }: RocketButtonProps) {
   const [status, setStatus] = useState<"idle" | "launching" | "success">("idle");
   const controls = useAnimation();
 
@@ -63,16 +64,17 @@ export function RocketButton({ email }: RocketButtonProps) {
     <button
       onClick={handleLaunch}
       disabled={status === "launching"}
-      className="group relative flex items-center gap-4 rounded-full bg-white px-8 py-4 text-lg font-semibold text-black transition-all hover:bg-zinc-200 disabled:cursor-not-allowed min-w-[280px] justify-center"
+      className="group relative flex items-center gap-4 rounded-full bg-white px-8 py-4 text-lg font-semibold text-black transition-all hover:bg-zinc-200 disabled:cursor-not-allowed min-w-[220px] justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+      aria-label={`Copy ${email} to clipboard`}
     >
       <span className={status === "success" ? "text-emerald-600 flex items-center gap-2" : "flex items-center gap-2"}>
         {status === "success" ? (
           <>
             <Check size={20} />
-            Email Copied!
+            Copied!
           </>
         ) : (
-          email
+          label
         )}
       </span>
       
