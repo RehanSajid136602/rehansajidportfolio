@@ -7,6 +7,8 @@ interface Particle {
   id: number;
   x: number;
   y: number;
+  offsetX: number;
+  offsetY: number;
 }
 
 const MAX_PARTICLES = 6; // Reduced from 12
@@ -14,7 +16,10 @@ const THROTTLE_MS = 32; // ~30fps for particle generation
 
 export function CursorStardust() {
   const [particles, setParticles] = useState<Particle[]>([]);
-  const [isTouch, setIsTouch] = useState(false);
+  const [isTouch] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(pointer: coarse)").matches;
+  });
   const shouldReduceMotion = useReducedMotion();
   const lastUpdateRef = useRef<number>(0);
   
@@ -32,6 +37,8 @@ export function CursorStardust() {
       id: now,
       x: e.clientX,
       y: e.clientY,
+      offsetX: (Math.random() - 0.5) * 30,
+      offsetY: (Math.random() - 0.5) * 30,
     };
     
     setParticles((prev) => {
@@ -41,8 +48,6 @@ export function CursorStardust() {
   }, []);
 
   useEffect(() => {
-    setIsTouch(window.matchMedia("(pointer: coarse)").matches);
-    
     if (!isTouch && !shouldReduceMotion) {
       window.addEventListener("mousemove", handleMouseMove, { passive: true });
     }
@@ -69,7 +74,7 @@ export function CursorStardust() {
             style={{
               left: p.x - 2,
               top: p.y - 2,
-              transform: `translate(${(Math.random() - 0.5) * 30}px, ${(Math.random() - 0.5) * 30}px)`,
+              transform: `translate(${p.offsetX}px, ${p.offsetY}px)`,
             }}
           />
         ))}

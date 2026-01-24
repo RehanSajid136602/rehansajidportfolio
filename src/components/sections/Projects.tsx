@@ -5,14 +5,27 @@ import { CloudSun, Coins, Languages, Mail, Utensils, ExternalLink, Cpu, Sparkles
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
+const stars = Array.from({ length: 20 }, (_, index) => ({
+  id: index,
+  top: `${Math.random() * 100}%`,
+  left: `${Math.random() * 100}%`,
+  duration: Math.random() * 3 + 2,
+  delay: Math.random() * 5,
+  driftX: Math.random() * 0.5,
+  driftY: Math.random() * 0.5,
+}));
+
 const projects = [
   {
     id: 1,
     title: "Aether Weather",
     description: "Advanced atmospheric data visualization.",
+    problem: "Teams needed clear, real-time weather insight without dashboard clutter.",
+    outcome: "Delivered a streamlined UI for faster forecasting decisions.",
     icon: <CloudSun className="text-blue-400" size={24} />,
     color: "bg-blue-500/10 border-blue-400/40 shadow-blue-500/20",
     link: "https://aether-weather-v2.vercel.app/",
+    repo: "https://github.com/RehanSajid136602/aether-weather-v2",
     orbit: 240,
     speed: 35,
   },
@@ -20,6 +33,8 @@ const projects = [
     id: 2,
     title: "NeoExchange",
     description: "Modern currency exchange platform.",
+    problem: "Users struggled to compare rates quickly across currencies.",
+    outcome: "Simplified flow that highlights best rates and trends.",
     icon: <Coins className="text-emerald-400" size={24} />,
     color: "bg-emerald-500/10 border-emerald-400/40 shadow-emerald-500/20",
     link: "https://neoexchange-v2.vercel.app/",
@@ -30,9 +45,12 @@ const projects = [
     id: 3,
     title: "AI Translator",
     description: "Neural network translation engine.",
+    problem: "Teams needed fast, accurate translations for global content.",
+    outcome: "Reduced copy turnaround with AI-assisted workflows.",
     icon: <Languages className="text-purple-400" size={24} />,
     color: "bg-purple-500/10 border-purple-400/40 shadow-purple-500/20",
     link: "https://ai-translator-v4.vercel.app/",
+    repo: "https://github.com/RehanSajid136602/ai-translator-v4",
     orbit: 240,
     speed: 35,
   },
@@ -40,6 +58,8 @@ const projects = [
     id: 4,
     title: "Email Rewriter",
     description: "Tone optimization for professionals.",
+    problem: "Busy teams needed professional replies in less time.",
+    outcome: "Automated tone polish to speed up client communication.",
     icon: <Mail className="text-orange-400" size={24} />,
     color: "bg-orange-500/10 border-orange-400/40 shadow-orange-500/20",
     link: "https://ai-email-rewriter-five.vercel.app/",
@@ -50,6 +70,8 @@ const projects = [
     id: 5,
     title: "Recipe Gen",
     description: "AI culinary assistant.",
+    problem: "Home cooks wanted quick meal ideas from limited ingredients.",
+    outcome: "Generated recipes instantly with personalized suggestions.",
     icon: <Utensils className="text-yellow-400" size={24} />,
     color: "bg-yellow-500/10 border-yellow-400/40 shadow-yellow-500/20",
     link: "https://ai-recipe-generator-v1.vercel.app/",
@@ -92,24 +114,24 @@ export function Projects() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.05)_0%,transparent_70%)]" />
         {/* Animated Stars */}
-        {[...Array(20)].map((_, i) => (
+        {stars.map((star) => (
           <motion.div
-            key={i}
+            key={star.id}
             animate={{ 
               opacity: [0.2, 0.8, 0.2],
               scale: [1, 1.2, 1],
             }}
             transition={{ 
-              duration: Math.random() * 3 + 2, 
+              duration: star.duration,
               repeat: Infinity,
-              delay: Math.random() * 5 
+              delay: star.delay,
             }}
             className="absolute h-1 w-1 bg-white rounded-full"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              x: mousePos.x * (Math.random() * 0.5),
-              y: mousePos.y * (Math.random() * 0.5),
+              top: star.top,
+              left: star.left,
+              x: mousePos.x * star.driftX,
+              y: mousePos.y * star.driftY,
             }}
           />
         ))}
@@ -222,7 +244,7 @@ export function Projects() {
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="absolute z-40 w-80 p-8 rounded-3xl bg-black/90 backdrop-blur-2xl border border-white/20 text-center shadow-2xl pointer-events-none"
+                className="absolute z-40 w-80 p-8 rounded-3xl bg-black/90 backdrop-blur-2xl border border-white/20 text-center shadow-2xl pointer-events-auto"
               >
                 {(() => {
                   const p = projects.find(p => p.id === activeProject);
@@ -240,6 +262,30 @@ export function Projects() {
                       </motion.div>
                       <h3 className="text-2xl font-bold text-white mb-2">{p.title}</h3>
                       <p className="text-sm text-secondary leading-relaxed mb-6">{p.description}</p>
+                      <div className="space-y-2 text-xs text-secondary text-left">
+                        <p><span className="text-white">Problem:</span> {p.problem}</p>
+                        <p><span className="text-white">Outcome:</span> {p.outcome}</p>
+                      </div>
+                      <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+                        <a
+                          href={p.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="rounded-full bg-white px-4 py-2 text-[11px] font-semibold text-black transition-colors hover:bg-zinc-200"
+                        >
+                          View Project
+                        </a>
+                        {p.repo && (
+                          <a
+                            href={p.repo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-full border border-white/20 px-4 py-2 text-[11px] font-semibold text-white transition-colors hover:border-white/40 hover:bg-white/10"
+                          >
+                            Repo
+                          </a>
+                        )}
+                      </div>
                       <div className="flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest text-accent">
                         <span>Initialize Protocol</span>
                         <ExternalLink size={12} />
@@ -274,6 +320,23 @@ export function Projects() {
               <div className="flex-1">
                 <h3 className="text-lg font-bold">{project.title}</h3>
                 <p className="text-sm text-secondary">{project.description}</p>
+                <div className="mt-2 space-y-1 text-xs text-secondary">
+                  <p><span className="text-white">Problem:</span> {project.problem}</p>
+                  <p><span className="text-white">Outcome:</span> {project.outcome}</p>
+                </div>
+                {project.repo && (
+                  <button
+                    type="button"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      window.open(project.repo, "_blank", "noopener,noreferrer");
+                    }}
+                    className="mt-3 inline-flex items-center rounded-full border border-white/20 px-3 py-1 text-[11px] font-semibold text-white transition-colors hover:border-white/40 hover:bg-white/10"
+                  >
+                    Repo
+                  </button>
+                )}
               </div>
               <ExternalLink className="opacity-30 group-hover:opacity-100 transition-opacity" size={20} />
             </motion.a>

@@ -10,6 +10,10 @@ const Projects = dynamic(() => import("@/components/sections/Projects").then(mod
   loading: () => <div className="w-full py-24 flex items-center justify-center"><div className="animate-pulse text-secondary">Loading...</div></div>,
 });
 
+const HireMe = dynamic(() => import("@/components/sections/HireMe").then(mod => ({ default: mod.HireMe })), {
+  loading: () => <div className="w-full py-24 flex items-center justify-center"><div className="animate-pulse text-secondary">Loading...</div></div>,
+});
+
 const Experience = dynamic(() => import("@/components/sections/Experience").then(mod => ({ default: mod.Experience })), {
   loading: () => <div className="w-full py-24 flex items-center justify-center"><div className="animate-pulse text-secondary">Loading...</div></div>,
 });
@@ -24,6 +28,7 @@ export default function Home() {
       <Hero />
       <Skills />
       <Projects />
+      <HireMe />
       <Experience />
       <Contact />
     </main>
