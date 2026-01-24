@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { CloudSun, Coins, Languages, Mail, Utensils, ExternalLink, Cpu, Sparkles } from "lucide-react";
+import { CloudSun, Coins, Languages, Mail, Utensils, ExternalLink, Cpu, Sparkles, Github, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -13,8 +13,14 @@ const projects = [
     icon: <CloudSun className="text-blue-400" size={24} />,
     color: "bg-blue-500/10 border-blue-400/40 shadow-blue-500/20",
     link: "https://aether-weather-v2.vercel.app/",
+    github: "https://github.com/RehanSajid136602/aether-weather",
     orbit: 240,
     speed: 35,
+    caseStudy: {
+      problem: "Users needed accurate, real-time weather data with visual insights",
+      solution: "Built interactive weather dashboard with advanced visualization",
+      result: "Optimized images + code-splitting for faster loads"
+    }
   },
   {
     id: 2,
@@ -23,8 +29,14 @@ const projects = [
     icon: <Coins className="text-emerald-400" size={24} />,
     color: "bg-emerald-500/10 border-emerald-400/40 shadow-emerald-500/20",
     link: "https://neoexchange-v2.vercel.app/",
+    github: "https://github.com/RehanSajid136602/neoexchange",
     orbit: 240,
     speed: 35,
+    caseStudy: {
+      problem: "Complex currency conversion with real-time rates needed",
+      solution: "Created streamlined interface with live rate updates",
+      result: "Real-time API integration + responsive design"
+    }
   },
   {
     id: 3,
@@ -33,8 +45,14 @@ const projects = [
     icon: <Languages className="text-purple-400" size={24} />,
     color: "bg-purple-500/10 border-purple-400/40 shadow-purple-500/20",
     link: "https://ai-translator-v4.vercel.app/",
+    github: "https://github.com/RehanSajid136602/ai-translator",
     orbit: 240,
     speed: 35,
+    caseStudy: {
+      problem: "Quick, accurate text translation across multiple languages",
+      solution: "Integrated AI translation with clean interface",
+      result: "Multi-language support + instant translation"
+    }
   },
   {
     id: 4,
@@ -43,8 +61,14 @@ const projects = [
     icon: <Mail className="text-orange-400" size={24} />,
     color: "bg-orange-500/10 border-orange-400/40 shadow-orange-500/20",
     link: "https://ai-email-rewriter-five.vercel.app/",
+    github: "https://github.com/RehanSajid136602/email-rewriter",
     orbit: 240,
     speed: 35,
+    caseStudy: {
+      problem: "Professional email tone adjustment needed",
+      solution: "AI-powered tone analysis and rewriting",
+      result: "Context-aware suggestions + multiple tone options"
+    }
   },
   {
     id: 5,
@@ -53,8 +77,14 @@ const projects = [
     icon: <Utensils className="text-yellow-400" size={24} />,
     color: "bg-yellow-500/10 border-yellow-400/40 shadow-yellow-500/20",
     link: "https://ai-recipe-generator-v1.vercel.app/",
+    github: "https://github.com/RehanSajid136602/recipe-generator",
     orbit: 240,
     speed: 35,
+    caseStudy: {
+      problem: "Personalized recipe recommendations based on ingredients",
+      solution: "AI-powered recipe generation with ingredient analysis",
+      result: "Personalized recommendations + detailed cooking instructions"
+    }
   },
 ];
 
@@ -222,7 +252,7 @@ export function Projects() {
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="absolute z-40 w-80 p-8 rounded-3xl bg-black/90 backdrop-blur-2xl border border-white/20 text-center shadow-2xl pointer-events-none"
+                className="absolute z-40 w-96 p-8 rounded-3xl bg-black/90 backdrop-blur-2xl border border-white/20 text-center shadow-2xl"
               >
                 {(() => {
                   const p = projects.find(p => p.id === activeProject);
@@ -238,11 +268,57 @@ export function Projects() {
                           {p.icon}
                         </div>
                       </motion.div>
-                      <h3 className="text-2xl font-bold text-white mb-2">{p.title}</h3>
+                      <h3 className="text-2xl font-bold text-white mb-3">{p.title}</h3>
                       <p className="text-sm text-secondary leading-relaxed mb-6">{p.description}</p>
-                      <div className="flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest text-accent">
-                        <span>Initialize Protocol</span>
-                        <ExternalLink size={12} />
+                      
+                      {/* Case Study Section */}
+                      <div className="text-left bg-white/5 rounded-xl p-4 mb-6">
+                        <div className="flex items-center gap-2 text-xs font-semibold text-accent mb-3">
+                          <ChevronDown size={14} />
+                          <span>Case Study</span>
+                        </div>
+                        <div className="space-y-2 text-sm">
+                          <div>
+                            <span className="text-secondary">Problem:</span>
+                            <p className="text-white font-medium">{p.caseStudy.problem}</p>
+                          </div>
+                          <div>
+                            <span className="text-secondary">Solution:</span>
+                            <p className="text-white font-medium">{p.caseStudy.solution}</p>
+                          </div>
+                          <div>
+                            <span className="text-secondary">Result:</span>
+                            <p className="text-white font-medium">{p.caseStudy.result}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex gap-3 justify-center">
+                        <motion.a
+                          href={p.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-white text-sm font-medium"
+                        >
+                          <ExternalLink size={14} />
+                          Live Demo
+                        </motion.a>
+                        {p.github && (
+                          <motion.a
+                            href={p.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 text-white text-sm font-medium hover:border-white/40"
+                          >
+                            <Github size={14} />
+                            GitHub
+                          </motion.a>
+                        )}
                       </div>
                     </>
                   );
@@ -255,28 +331,76 @@ export function Projects() {
         /* Mobile View: Vertical Energy Stack */
         <div className="grid gap-6 w-full max-w-md z-10">
           {projects.map((project, i) => (
-            <motion.a
+            <motion.div
               key={project.id}
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1 }}
               className={cn(
-                "group flex items-center gap-5 p-6 rounded-2xl border bg-black/40 backdrop-blur-md transition-all active:scale-95 border-white/10 hover:border-white/30",
+                "group p-6 rounded-2xl border bg-black/40 backdrop-blur-md transition-all border-white/10 hover:border-white/30",
                 project.color
               )}
             >
-              <div className="p-4 rounded-xl bg-black/60 group-hover:scale-110 transition-transform">
-                {project.icon}
+              <div className="flex items-center gap-5 mb-4">
+                <div className="p-4 rounded-xl bg-black/60 group-hover:scale-110 transition-transform">
+                  {project.icon}
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold">{project.title}</h3>
+                  <p className="text-sm text-secondary">{project.description}</p>
+                </div>
               </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold">{project.title}</h3>
-                <p className="text-sm text-secondary">{project.description}</p>
+
+              {/* Mobile Case Study */}
+              <div className="bg-white/5 rounded-xl p-3 mb-4">
+                <div className="flex items-center gap-2 text-xs font-semibold text-accent mb-2">
+                  <ChevronDown size={12} />
+                  <span>Case Study</span>
+                </div>
+                <div className="space-y-1 text-xs">
+                  <div>
+                    <span className="text-secondary">Problem:</span>
+                    <p className="text-white font-medium">{project.caseStudy.problem}</p>
+                  </div>
+                  <div>
+                    <span className="text-secondary">Solution:</span>
+                    <p className="text-white font-medium">{project.caseStudy.solution}</p>
+                  </div>
+                  <div>
+                    <span className="text-secondary">Result:</span>
+                    <p className="text-white font-medium">{project.caseStudy.result}</p>
+                  </div>
+                </div>
               </div>
-              <ExternalLink className="opacity-30 group-hover:opacity-100 transition-opacity" size={20} />
-            </motion.a>
+
+              {/* Mobile Action Buttons */}
+              <div className="flex gap-2">
+                <motion.a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex items-center gap-2 px-3 py-2 rounded-full bg-accent text-white text-xs font-medium flex-1 justify-center"
+                >
+                  <ExternalLink size={12} />
+                  Demo
+                </motion.a>
+                {project.github && (
+                  <motion.a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center gap-2 px-3 py-2 rounded-full border border-white/20 text-white text-xs font-medium flex-1 justify-center"
+                  >
+                    <Github size={12} />
+                    Code
+                  </motion.a>
+                )}
+              </div>
+            </motion.div>
           ))}
         </div>
       )}

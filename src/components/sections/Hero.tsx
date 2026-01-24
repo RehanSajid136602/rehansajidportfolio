@@ -3,8 +3,9 @@
 import { memo } from "react";
 import { motion } from "framer-motion";
 import { variants } from "@/lib/animations";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle, Zap } from "lucide-react";
 import { GlitchText } from "@/components/effects/GlitchText";
+import { CONTACT } from "@/lib/constants";
 
 function HeroComponent() {
   return (
@@ -21,34 +22,57 @@ function HeroComponent() {
         animate="animate"
         className="flex flex-col items-center gap-6"
       >
-        <motion.span
+<motion.span
           variants={variants.fadeInUp}
           className="text-sm font-medium tracking-widest uppercase text-secondary"
         >
-          Available for new projects
+          {CONTACT.status}
         </motion.span>
 
         <motion.h1
           variants={variants.fadeInUp}
           className="text-5xl font-bold tracking-tight sm:text-7xl"
         >
-          I am <GlitchText text="Muhammad Rehan" className="text-white" />
+          I build fast, modern websites for businesses
         </motion.h1>
 
         <motion.p
           variants={variants.fadeInUp}
           className="max-w-xl text-lg text-secondary sm:text-xl"
         >
-          A software engineer specializing in building high-performance 
-          web applications with a focus on motion design and user experience.
+          Delivered in 24–72 hours • Responsive • SEO-ready
         </motion.p>
+
+        <motion.div variants={variants.fadeInUp} className="mt-6 flex flex-col sm:flex-row gap-4 items-center">
+          <motion.a
+            href={`https://wa.me/${CONTACT.whatsapp.number.replace('+', '')}?text=${encodeURIComponent(CONTACT.whatsapp.message)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="flex items-center gap-2 rounded-full bg-green-500 px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-green-600 shadow-lg shadow-green-500/25"
+          >
+            <MessageCircle size={18} />
+            WhatsApp Me
+          </motion.a>
+          
+          <motion.a
+            href="#contact"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-black transition-colors hover:bg-zinc-200"
+          >
+            <Zap size={18} />
+            Get a Free 24h Demo
+          </motion.a>
+        </motion.div>
 
         <motion.div variants={variants.fadeInUp} className="mt-4">
           <motion.a
             href="#projects"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-black transition-colors hover:bg-zinc-200"
+            className="flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-medium text-secondary transition-colors hover:border-white/40 hover:text-white"
           >
             View My Work
             <ArrowRight size={18} />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CursorStardust } from "@/components/effects/CursorStardust";
+import { StickyWhatsApp } from "@/components/ui/StickyWhatsApp";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,6 +48,7 @@ export default function RootLayout({
       >
         <CursorStardust />
         {children}
+        <StickyWhatsApp />
       </body>
     </html>
   );

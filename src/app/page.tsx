@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
+import { Services } from "@/components/sections/Services";
 
 // Dynamic imports for below-the-fold components
 const Skills = dynamic(() => import("@/components/sections/Skills").then(mod => ({ default: mod.Skills })), {
@@ -14,6 +15,10 @@ const Experience = dynamic(() => import("@/components/sections/Experience").then
   loading: () => <div className="w-full py-24 flex items-center justify-center"><div className="animate-pulse text-secondary">Loading...</div></div>,
 });
 
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials").then(mod => ({ default: mod.Testimonials })), {
+  loading: () => <div className="w-full py-24 flex items-center justify-center"><div className="animate-pulse text-secondary">Loading...</div></div>,
+});
+
 const Contact = dynamic(() => import("@/components/sections/Contact").then(mod => ({ default: mod.Contact })), {
   loading: () => <div className="w-full py-24 flex items-center justify-center"><div className="animate-pulse text-secondary">Loading...</div></div>,
 });
@@ -22,9 +27,11 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center overflow-x-hidden bg-background text-foreground">
       <Hero />
+      <Services />
       <Skills />
       <Projects />
       <Experience />
+      <Testimonials />
       <Contact />
     </main>
   );

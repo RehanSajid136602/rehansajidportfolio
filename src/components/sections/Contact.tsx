@@ -2,12 +2,11 @@
 
 import { motion } from "framer-motion";
 import { variants } from "@/lib/animations";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter, MessageCircle, Mail, MapPin } from "lucide-react";
 import { RocketButton } from "@/components/ui/RocketButton";
+import { CONTACT } from "@/lib/constants";
 
 export function Contact() {
-  const email = "sajidnadeem2020@gmail.com";
-
   return (
     <section id="contact" className="w-full max-w-5xl py-32 px-6 mx-auto">
       <motion.div
@@ -23,10 +22,40 @@ export function Contact() {
             Currently looking for new opportunities and interesting collaborations. 
             My inbox is always open.
           </p>
+          <div className="flex items-center justify-center gap-4 text-sm text-accent">
+            <MapPin size={16} />
+            <span>{CONTACT.location}</span>
+            <span>•</span>
+            <span>{CONTACT.status}</span>
+          </div>
         </motion.div>
 
         <motion.div variants={variants.fadeInUp} className="flex flex-col items-center gap-6">
-          <RocketButton email={email} />
+          <div className="flex flex-col sm:flex-row gap-4 items-center">
+            {/* WhatsApp Button */}
+            <motion.a
+              href={`https://wa.me/${CONTACT.whatsapp.number.replace('+', '')}?text=${encodeURIComponent(CONTACT.whatsapp.message)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-2 rounded-full bg-green-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-600 shadow-lg shadow-green-500/25"
+            >
+              <MessageCircle size={18} />
+              WhatsApp Me
+            </motion.a>
+
+            {/* Email Button */}
+            <motion.a
+              href={`mailto:${CONTACT.email}`}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white/40 hover:bg-white/10"
+            >
+              <Mail size={18} />
+              {CONTACT.email}
+            </motion.a>
+          </div>
 
           <div className="flex gap-4">
             {[
