@@ -92,23 +92,71 @@ export function Projects() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isLowPower, setIsLowPower] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const animationFrameRef = useRef<number>(null as any);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    const checkPower = () => {
+      setIsLowPower(
+        'connection' in navigator && 
+        (navigator as any).connection?.saveData || 
+        'hardwareConcurrency' in navigator && 
+        (navigator as any).hardwareConcurrency <= 2
+      );
+    };
+    
     checkMobile();
+    checkPower();
+    
     window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || isLowPower) return;
+    
     const rect = containerRef.current.getBoundingClientRect();
-    setMousePos({
-      x: (e.clientX - rect.left - rect.width / 2) / 25,
-      y: (e.clientY - rect.top - rect.height / 2) / 25,
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+    
+    animationFrameRef.current = requestAnimationFrame(() => {
+      setMousePos({
+        x: (e.clientX - centerX) * 0.02, // Reduced movement
+        y: (e.clientY - centerY) * 0.02,
+      });
     });
+  };
+
+  const getProjectPosition = (index: number, orbit: number, currentRotation: number = 0) => {
+    const angle = (index / projects.length) * 360 + currentRotation;
+    const x = Math.cos((angle * Math.PI) / 180) * orbit;
+    const y = Math.sin((angle * Math.PI) / 180) * orbit;
+    return { x, y };
   };
 
   return (
@@ -118,31 +166,27 @@ export function Projects() {
       onMouseMove={handleMouseMove}
       className="relative w-full py-32 px-6 overflow-hidden min-h-[900px] flex flex-col items-center justify-center bg-[#030303]"
     >
-      {/* 1. Deep Space Background */}
+      {/* 1. Deep Space Background - Optimized */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.05)_0%,transparent_70%)]" />
-        {/* Animated Stars */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            animate={{ 
-              opacity: [0.2, 0.8, 0.2],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{ 
-              duration: Math.random() * 3 + 2, 
-              repeat: Infinity,
-              delay: Math.random() * 5 
-            }}
-            className="absolute h-1 w-1 bg-white rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              x: mousePos.x * (Math.random() * 0.5),
-              y: mousePos.y * (Math.random() * 0.5),
-            }}
-          />
-        ))}
+        {/* Animated Stars - Reduced and optimized */}
+        {!isMobile && !isLowPower && (
+          <div className="stars-container">
+            {[...Array(8)].map((_, i) => ( // Reduced from 20 to 8
+              <div
+                key={i}
+                className="star"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 3}s`,
+                  '--mouse-x': `${mousePos.x * 0.3}px`,
+                  '--mouse-y': `${mousePos.y * 0.3}px`
+                } as React.CSSProperties}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <motion.div 
