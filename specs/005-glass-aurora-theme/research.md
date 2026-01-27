@@ -1,28 +1,37 @@
-# Research: Learning Journey & WhatsApp FAB Styling
+# Research: Cartoonic Light/Dark Mode Implementation
 
 ## Audit Findings
 
-### Learning Journey Section (`src/components/sections/Experience.tsx`)
-- **Wrapper**: `<section id="experience" ... className="... bg-[var(--section-bg)]">`
-- **Current Token**: In `globals.css`, `glass-aurora` defines `--section-bg: rgba(15, 23, 42, 0.5)`.
-- **Requirement**: Remove "black-block" override. The aurora background is on `body::before`. If `--section-bg` has opacity, it might obscure the aurora.
-- **Decision**: Update `glass-aurora`'s `--section-bg` to `transparent` to let the aurora glow through. Ensure `glass-panel` or `glass-card` classes are used for content blocks within the section to provide the "glass veil" effect.
+### Theme Registry & UI
+- **Location**: `src/components/ui/ThemeToggle.tsx`
+- **Registry**: `THEMES` array containing `default`, `cartoon`, `glass-aurora`.
+- **Mechanism**: `useState` + `useEffect` applying `data-theme` to `document.documentElement`.
+- **Persistence**: `localStorage.getItem("portfolio-theme")`.
 
-### WhatsApp FAB (`src/components/ui/StickyWhatsApp.tsx`)
-- **Classes**: `bg-green-500 text-white shadow-lg shadow-green-500/25 hover:shadow-green-500/40`
-- **Requirement**: Convert to token/blue.
-- **Decision**: Define a new semantic token `--whatsapp-bg` and `--whatsapp-shadow`.
-  - Default/Cartoon: Keep green (optional) or move to blue if mandated by constitution.
-  - Glass Aurora: MUST be blue per Constitution Principle IV.
-- **Alternative**: Use Tailwind semantic classes if already mapped (e.g., `bg-accent`).
+### Application Method
+- Themes are applied via the `data-theme` attribute on the `<html>` element.
+- CSS selectors in `globals.css` use `[data-theme="..."]`.
 
-## Decision Consolidations
+### Token Definitions
+- **Location**: `src/app/globals.css`.
+- **Current Cartoon tokens**: Defined under `[data-theme="cartoon"]`. It is currently a Light theme (orange/amber/yellow hues).
 
-- **Decision**: Set `glass-aurora` `--section-bg` to `transparent`.
-- **Rationale**: Best way to ensure the section inherits the global aurora background without layout shifts.
-- **Decision**: Use `bg-accent` or a new `--fab-bg` token for StickyWhatsApp.
-- **Rationale**: Aligns with "token-driven" requirement and avoids hard-coded hexes.
+## Unknowns & Resolutions
+
+### 1. Naming Convention for Variants
+- **Question**: Should we use `data-variant` or just different `data-theme` values?
+- **Decision**: Use **Option A: `data-theme="cartoon"` + `data-variant="light|dark"`**.
+- **Rationale**: The user specifically requested a toggle that *only appears* when the theme is cartoonic. This implies "Cartoonic" is the primary selection, and light/dark is a sub-preference. It also prevents bloating the main theme cycle.
+
+### 2. Secondary Persistence
+- **Question**: Where to store the cartoon-specific variant?
+- **Decision**: `localStorage.setItem("cartoon-variant", "light" | "dark")`.
+- **Rationale**: Keeps it separate from the global theme preference.
+
+### 3. Transition Logic
+- **Question**: How to handle the transition between themes?
+- **Decision**: When switching *to* cartoon, the variant toggle appears. When switching *away*, the global theme takes over, but the variant toggle is hidden.
 
 ## Best Practices
-- Use `backdrop-filter: blur(...)` for glass sections to maintain readability over the aurora background.
-- Ensure transition duration is consistent with other interactive elements (300ms).
+- Use CSS variables for all tokens to ensure smooth transitions.
+- Ensure the variant attribute is removed or ignored when not in cartoon mode to prevent accidental styling leaks.

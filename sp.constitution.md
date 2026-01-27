@@ -1,17 +1,17 @@
 <!--
 Sync Impact Report:
-- Version change: 2.3.0 -> 2.3.1
+- Version change: 2.3.0 -> 2.4.0
 - List of modified principles:
-  - VIII. Cartoonic Theme Light/Dark Mode Toggle: Enhanced scoping, scope isolation
-    and token discipline to prevent cartoonic-yellow bleed into root.
-- Added sections: None
-- Removed sections: None
+  - VII. Theme Scoping and Isolation: Completely rewritten to address Cartoonic theme override issue
+  - VIII. CSS Variable Governance: Added new principle for scoped theme variables
+- Added sections: VIII. CSS Variable Governance, IX. Theme Application Mechanism
+- Removed sections: VIII. Cartoonic Theme Light/Dark Mode Toggle (replaced with more specific scoping rules)
 - Templates requiring updates:
-  - .specify/templates/plan-template.md (Updated Constitution Check) ✅ updated
-  - .specify/templates/spec-template.md (Updated Requirement placeholders) ✅ updated
-  - .specify/templates/tasks-template.md (Updated Foundational tasks) ✅ updated
+  - .specify/templates/plan-template.md ⚠ pending
+  - .specify/templates/spec-template.md ⚠ pending
+  - .specify/templates/tasks-template.md ⚠ pending
 - Follow-up TODOs: None
- -->
+-->
 
 # Rehan Sajid Portfolio Constitution
 
@@ -35,24 +35,14 @@ Keep bundle small: no heavy libs, no images required, no large new components. U
 ### VI. Theme Switcher Consistency
 Keep the theme switcher UX simple and consistent with current UI. The theme switching functionality should remain intuitive and maintain the same interaction patterns. This ensures users can seamlessly switch between themes without confusion.
 
-### VII. Glass Aurora Theme Specifics
-The Glass Aurora theme must implement the following characteristics:
-- Super deep glass effect: layered translucency with multiple levels of transparency
-- Backdrop blur effects for glass-like appearance
-- Specular highlights for realistic glass reflections
-- Subtle aurora glow with soft radial gradients
-- Blue color scheme for all primary CTAs and buttons (replacing any green accents)
-- Tasteful animations that are performant and respect reduced-motion preferences
+### VII. Theme Scoping and Isolation
+Each theme's CSS variables must be properly scoped to prevent cross-contamination. The Cartoonic theme must NOT override global background/surface values that affect other themes. Theme-specific CSS variables must be defined only under their respective theme selectors (e.g., [data-theme="cartoonic"], [data-theme="glass-aurora"], [data-theme="default"]). No theme should define CSS variables in :root that could override another theme's values. This ensures each theme operates independently without affecting others.
 
-### VIII. Cartoonic Theme Light/Dark Mode Toggle
-A special light/dark mode toggle exists specifically for the cartoonic theme with these constraints:
-- **Definition**: The cartoonic theme has two variants: cartoonic-light and cartoonic-dark (or controlled by a cartoonic mode flag)
-- **Scope Isolation**: Other themes (default, glass-aurora) completely ignore this toggle; it only affects cartoonic theme
-- **Token Implementation**: Implemented exclusively via CSS variables (semantic tokens), not hard-coded values
-- **Persistence**: Stored under cartoonic-scoped key (e.g., "cartoonic-mode") to avoid conflicts with main theme system
-- **UI Visibility**: Toggle is only visible and enabled when the current theme is cartoonic
-- **No Layout Impact**: Mode switching only changes colors/appearance, never layout or structure
-- **Accessibility Compliance**: Must follow WCAG guidelines for contrast in both light and dark variants
+### VIII. CSS Variable Governance
+CSS variables for themes must follow strict scoping rules: each theme defines its variables only under its specific selector (e.g., [data-theme="cartoonic"]), not in :root unless they are true neutral defaults. Non-cartoonic themes must not inherit cartoonic --bg/--surface values. All theme-specific variables must be prefixed appropriately to indicate their theme scope. This prevents the Cartoonic yellow background (or any theme) from overriding the entire site when not active.
+
+### IX. Theme Application Mechanism
+The active theme must be applied via a single, consistent mechanism using data-theme attribute on the html or body element. Only one theme should be active at a time, with CSS variables scoped to that specific theme's selector. The theme switching mechanism must ensure that when a theme becomes inactive, its CSS variables are no longer applied globally. This provides a clean, predictable way to switch between themes without conflicts.
 
 ## Additional Constraints
 
@@ -69,4 +59,4 @@ A special light/dark mode toggle exists specifically for the cartoonic theme wit
 
 This constitution supersedes all other development practices for the Rehan Sajid Portfolio project. Amendments require documentation of impact, a version bump, and a clear rationale.
 
-**Version**: 2.3.1 | **Ratified**: 2026-01-26 | **Last Amended**: 2026-01-27
+**Version**: 2.4.0 | **Ratified**: 2026-01-27 | **Last Amended**: 2026-01-27

@@ -36,6 +36,7 @@
 - [ ] Token Discipline: No hard-coded colors or hex values that bypass theme tokens.
 - [ ] Theme Consistency: Existing 2 themes preserved; new 3rd theme applies across ALL sections.
 - [ ] Glass Aurora Specifics: Deep glass layering, blur, specular highlights, subtle aurora glow, blue CTAs.
+- [ ] Cartoonic Theme Scoping: Ensure cartoonic tokens are defined under [data-theme="cartoonic"] and no root-level tokens are used for theme variables to avoid cartoonic-yellow bleed.
 - [ ] Accessibility & Readability: WCAG contrast for text/icons/buttons across all themes.
 - [ ] Performance & Bundle Management: No heavy libs or perf regressions; reduced-motion friendly.
 - [ ] Theme Switcher Consistency: Theme switcher UX remains simple and unchanged.

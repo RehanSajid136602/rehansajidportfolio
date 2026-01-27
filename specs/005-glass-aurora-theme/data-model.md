@@ -1,20 +1,35 @@
-# Data Model: Glass Aurora Styling
+# Data Model: Cartoonic Variants
 
 ## UI Entities
 
-### Learning Journey Container
-- **Source**: `src/components/sections/Experience.tsx`
-- **State**: `theme` (affects background opacity and connection line colors)
-- **Constraint**: Must remain `bg-transparent` in Glass Aurora theme.
+### Theme Configuration
+- **Type**: `Theme`
+- **Values**: `"default" | "cartoon" | "glass-aurora"`
+- **Storage Key**: `"portfolio-theme"`
 
-### WhatsApp FAB
-- **Source**: `src/components/ui/StickyWhatsApp.tsx`
-- **State**: `theme` (determines background color and shadow color)
-- **Properties**:
-  - `bg`: `--accent` (or blue token)
-  - `shadow`: `--accent-hover` / opacity
+### Cartoon Variant
+- **Type**: `"light" | "dark"`
+- **Values**:
+  - `"light"`: Current amber/yellow cartoon theme.
+  - `"dark"`: New navy/blue/purple cartoon theme with high contrast.
+- **Trigger**: Only active when `Theme == "cartoon"`.
+- **Storage Key**: `"cartoon-variant"`
 
 ## State Transitions
-- **Theme Switch**:
-  - `default` -> `glass-aurora`: FAB turns blue, section bg becomes transparent.
-  - `cartoon` -> `glass-aurora`: FAB turns blue, section bg becomes transparent.
+
+### Theme Switching
+- Cycle: `Dark Pro` -> `Cartoon` -> `Glass Aurora` -> `Dark Pro`.
+- Persistence: Saved globally.
+
+### Cartoon Variant Toggling
+- User clicks "Mode" button (only visible in Cartoon mode).
+- State toggles between `light` and `dark`.
+- persistence: Saved specifically for cartoon mode.
+
+## Data Schema (Local Storage)
+```json
+{
+  "portfolio-theme": "cartoon",
+  "cartoon-variant": "dark"
+}
+```

@@ -1,18 +1,34 @@
-# Quickstart: Styling Verification
+# Quickstart: Cartoonic Light/Dark Verification
 
-## Verification Scenarios
+## Setup
+1. Run `npm run dev`.
+2. Open the site and use the main Theme Toggle to select **Cartoon**.
 
-### 1. Learning Journey Aurora Inheritance
-- **Action**: Switch to `glass-aurora` theme.
-- **Verification**: Ensure the Learning Journey section background is transparent and shows the radial aurora gradients from the body.
-- **Success**: No solid dark block background.
+## Verification Steps
 
-### 2. WhatsApp FAB Tokenization
-- **Action**: Inspect StickyWhatsApp button in `glass-aurora`.
-- **Verification**: Button should be blue (matching `--accent`) and shadows should match the blue glow.
-- **Success**: No `bg-green-500` visible in `glass-aurora`.
+### 1. Toggle Visibility
+- **Given**: Theme is `default` or `glass-aurora`.
+- **Verify**: The Light/Dark variant toggle is **NOT visible**.
 
-### 3. Theme Toggle Regression
-- **Action**: Cycle through all 3 themes (Default, Cartoon, Glass Aurora).
-- **Verification**: Check Learning Journey and WhatsApp FAB in each.
-- **Success**: Consistent styling per theme definition.
+- **Given**: Theme is `cartoon`.
+- **Verify**: The Light/Dark variant toggle **appears**.
+
+### 2. Cartoon Dark Mode
+- **Given**: Theme is `cartoon`.
+- **Action**: Toggle to **Dark**.
+- **Verify**:
+  - Background turns dark (e.g. navy/deep purple).
+  - Cartoon borders remain (black, thick).
+  - Text contrast is maintained.
+  - Buttons maintain cartoon shadows but adapt colors.
+
+### 3. Persistence
+- **Action**: Set Cartoon to **Dark**. Refresh page.
+- **Verify**: Site loads in **Cartoon Dark**.
+- **Action**: Switch to **Dark Pro**. Refresh page.
+- **Verify**: Site loads in **Dark Pro**.
+- **Action**: Switch back to **Cartoon**.
+- **Verify**: Site loads in **Cartoon Dark** (remembered preference).
+
+### 4. Regression Check
+- **Verify**: `Dark Pro` and `Glass Aurora` themes are visually identical to previous state.

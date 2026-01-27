@@ -1,32 +1,32 @@
-# Implementation Plan: Glass Aurora Theme Refinement
+# Implementation Plan: Cartoonic Light/Dark Mode
 
 **Branch**: `005-glass-aurora-theme` | **Date**: 2026-01-27 | **Spec**: [specs/005-glass-aurora-theme/spec.md](./spec.md)
-**Input**: Refine Learning Journey background and WhatsApp FAB styling for Glass Aurora theme.
+**Input**: Implement Light/Dark mode specific to the Cartoon theme.
 
 ## Summary
-Audit and update Learning Journey section to inherit aurora backgrounds and tokenize the WhatsApp FAB to use blue accents in the new theme.
+Introduce a variant system for the Cartoon theme using `data-variant="light|dark"`. Add a secondary toggle UI that only appears when the Cartoon theme is active. Define new dark-mode tokens for Cartoonic navy/blue style while preserving thick borders and shadows.
 
 ## Technical Context
 **Language/Version**: TypeScript / Next.js 15.x
-**Primary Dependencies**: Tailwind CSS v4, Framer Motion
-**Target Platform**: Web
-**Performance Goals**: 60fps animations, zero layout shift
-**Constraints**: No component structure changes (Constitution Principle I)
+**Primary Dependencies**: Tailwind CSS v4, Framer Motion, Lucide React
+**Project Type**: Web Application
+**Performance Goals**: Zero layout shift on variant switch.
+**Constraints**: Variant toggle MUST only show when theme is `cartoon`.
 
 ## Constitution Check
-- [x] Structural Preservation: No changes to layout/content.
-- [x] Visual Skin Isolation: Token-driven CSS variable updates.
-- [x] Theme Consistency: Applied to Learning Journey and WhatsApp FAB.
-- [x] Accessibility & Readability: Blue CTAs mandated for Glass Aurora.
-- [x] Performance: Using existing Tailwind classes.
+- [x] Structural Preservation: No changes to layout or component structure.
+- [x] Visual Skin Isolation: Token-driven switch using `data-variant`.
+- [x] Theme Consistency: Existing themes (Default, Glass Aurora) remain untouched.
+- [x] Accessibility & Readability: Dark mode for cartoon will be tested for contrast.
+- [x] Performance: Uses CSS variables for low-overhead switching.
 
-## Project StructureRefinement
+## Project Structure
 ### Documentation
 ```text
 specs/005-glass-aurora-theme/
 ├── plan.md              # This file
 ├── research.md          # Audit and decision log
-├── data-model.md        # UI state transitions
+├── data-model.md        # State and variant definitions
 └── quickstart.md        # Verification guide
 ```
 
@@ -34,33 +34,41 @@ specs/005-glass-aurora-theme/
 ```text
 src/
 ├── components/
-│   ├── sections/
-│   │   └── Experience.tsx # Learning Journey
 │   └── ui/
-│       └── StickyWhatsApp.tsx # WhatsApp FAB
+│       └── ThemeToggle.tsx # Add sub-toggle logic
 └── app/
-    └── globals.css      # Theme token definitions
+    └── globals.css      # Add [data-variant="dark"] tokens
 ```
 
-## Execution Phases
+## Phase 2: Implementation Strategy
 
-### Phase 0: Audit & Variable Definition
-- **Goal**: Establish the CSS variable mapping for FAB and Section backgrounds.
+### 1. Token Expansion (Phase 2.1)
+- **Goal**: Add dark variant tokens for the Cartoon theme.
 - **Touched Files**: `src/app/globals.css`
-- **Rollback**: Revert `globals.css` changes.
+- **Method**: Add `[data-theme="cartoon"][data-variant="dark"]` selector.
+- **Tokens to Add**:
+  - `--background`: Navy/Deep Purple (e.g. `#1e1b4b`)
+  - `--foreground`: Off-white (e.g. `#f8fafc`)
+  - `--primary`: Bright Blue or Indigo
+  - `--secondary`: Muted Lavender
+  - `--border-color`: Black (remains thick)
+  - `--shadow-*`: Black (remains offset)
 
-### Phase 1: Section Background Refinement
-- **Goal**: Update Learning Journey to use transparent background in Glass Aurora.
-- **Touched Files**: `src/components/sections/Experience.tsx`
-- **Rollback**: Reset `className` to original `bg-[var(--section-bg)]`.
+### 2. Logic & Toggle UI (Phase 2.2)
+- **Goal**: Implement variant state and UI toggle.
+- **Touched Files**: `src/components/ui/ThemeToggle.tsx`
+- **Logic**:
+  - Add `cartoonVariant` state (`"light" | "dark"`).
+  - Load/Save to `localStorage` key `cartoon-variant`.
+  - Effect: Apply `data-variant` to `documentElement` only if `theme === "cartoon"`.
+- **UI**:
+  - Add a small Sun/Moon button next to the main toggle.
+  - Animate visibility with Framer Motion (only show when `theme === "cartoon"`).
 
-### Phase 2: WhatsApp FAB Tokenization
-- **Goal**: Replace hard-coded green with blue theme tokens.
-- **Touched Files**: `src/components/ui/StickyWhatsApp.tsx`
-- **Rollback**: Revert classes to `bg-green-500`.
+### 3. Persistence & Clean-up (Phase 2.3)
+- **Goal**: Ensure clean switching.
+- **Logic**: When theme cycles to `default` or `glass-aurora`, remove `data-variant` attribute.
 
-## Validation Steps
-1. Toggle to `glass-aurora`.
-2. Verify Learning Journey background is transparent.
-3. Verify WhatsApp FAB is blue.
-4. Toggle back to `default` and `cartoon` to ensure no regressions.
+## Rollback Plan
+- Revert `globals.css` selectors.
+- Revert `ThemeToggle.tsx` to original `cycleTheme` logic and single-button UI.

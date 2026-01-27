@@ -30,7 +30,13 @@ export function ThemeToggle() {
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-theme", theme);
+
     localStorage.setItem("portfolio-theme", theme);
+
+    // Clean up old cartoonic-mode localStorage entry if it exists
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem("cartoonic-mode");
+    }
   }, [theme]);
 
   const cycleTheme = () => {

@@ -10,11 +10,15 @@
   --primary: #ffffff;
   --secondary: #a1a1aa;
   --accent: #2563eb;
-  
+
+  /* WhatsApp button specific variables for dark pro theme */
+  --whatsapp-button-bg: #25d366; /* WhatsApp green */
+  --whatsapp-button-hover: #1da851; /* Darker WhatsApp green */
+
   /* Typography */
   --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
-  
+
   /* Border Radius */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
@@ -22,13 +26,13 @@
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-  
+
   /* Borders */
   --border-color: rgba(255, 255, 255, 0.1);
   --border-hover: rgba(255, 255, 255, 0.2);
@@ -37,7 +41,7 @@
   --section-bg: var(--background);
   --card-bg: rgba(255, 255, 255, 0.05);
   --card-border: rgba(255, 255, 255, 0.1);
-  
+
   /* Focus Ring */
   --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.5);
 }
@@ -51,30 +55,36 @@
   --primary: #f59e0b;
   --secondary: #6b7280;
   --accent: #10b981;
-  
+
+  /* WhatsApp button specific variables for cartoon theme */
+  --whatsapp-button-bg: #25d366; /* WhatsApp green */
+  --whatsapp-button-hover: #1da851; /* Darker WhatsApp green */
+
   --font-sans: "Comic Neue", "Chalkboard SE", "Fredoka One", var(--font-geist-sans), Arial, sans-serif;
-  
+
   --radius-sm: 0.75rem;
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
   --radius-xl: 2rem;
   --radius-2xl: 2.5rem;
   --radius-full: 9999px;
-  
+
   --shadow-sm: 0 4px 0 0 #000;
   --shadow-md: 0 6px 0 0 #000;
   --shadow-lg: 0 8px 0 0 #000;
   --shadow-xl: 0 12px 0 0 #000;
-  
+
   --border-color: #000;
   --border-hover: #000;
 
   --section-bg: var(--background);
   --card-bg: #ffffff;
   --card-border: #000000;
-  
+
   --focus-ring: 0 0 0 4px #10b981, 0 0 0 6px #10b981;
 }
+
+
 
 /* ============================================
    GLASS AURORA THEME
@@ -146,6 +156,7 @@
   --button-primary-active: #1d4ed8;
   --button-primary-ring: 0 0 0 3px rgba(59, 130, 246, 0.5);
 }
+
 
 /* ============================================
    DEEP GLASS COMPONENT RECIPE
@@ -424,9 +435,9 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  background: var(--background, #050505); /* Fallback to dark background */
+  color: var(--foreground, #fafafa); /* Fallback to light text */
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   antialiased: subpixel-antialiased;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -439,6 +450,64 @@ body {
 [data-theme="cartoon"] body {
   background-image: radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+/* ============================================
+   WHATSAPP BUTTON STYLING FOR CARTOON THEME
+   ============================================ */
+/* Regular WhatsApp buttons in cartoon theme */
+[data-theme="cartoon"] a[href^="https://wa.me/"] {
+  background: var(--whatsapp-button-bg) !important;
+  color: white !important;
+}
+
+[data-theme="cartoon"] a[href^="https://wa.me/"]:hover {
+  background: var(--whatsapp-button-hover) !important;
+  transform: translateY(-2px);
+}
+
+/* Specific styling for floating WhatsApp button in cartoon theme */
+[data-theme="cartoon"] .fixed.bottom-6.right-6 a[href^="https://wa.me/"],
+[data-theme="cartoon"] .fixed.bottom-8.right-8 a[href^="https://wa.me/"] {
+  background: var(--whatsapp-button-bg) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4) !important;
+}
+
+[data-theme="cartoon"] .fixed.bottom-6.right-6 a[href^="https://wa.me/"]:hover,
+[data-theme="cartoon"] .fixed.bottom-8.right-8 a[href^="https://wa.me/"]:hover {
+  background: var(--whatsapp-button-hover) !important;
+  box-shadow: 0 6px 16px rgba(29, 168, 81, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ============================================
+   WHATSAPP BUTTON STYLING FOR DARK PRO THEME
+   ============================================ */
+/* Regular WhatsApp buttons in dark pro theme */
+[data-theme="default"] a[href^="https://wa.me/"] {
+  background: var(--whatsapp-button-bg) !important;
+  color: white !important;
+}
+
+[data-theme="default"] a[href^="https://wa.me/"]:hover {
+  background: var(--whatsapp-button-hover) !important;
+  transform: translateY(-2px);
+}
+
+/* Specific styling for floating WhatsApp button in dark pro theme */
+[data-theme="default"] .fixed.bottom-6.right-6 a[href^="https://wa.me/"],
+[data-theme="default"] .fixed.bottom-8.right-8 a[href^="https://wa.me/"] {
+  background: var(--whatsapp-button-bg) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4) !important;
+}
+
+[data-theme="default"] .fixed.bottom-6.right-6 a[href^="https://wa.me/"]:hover,
+[data-theme="default"] .fixed.bottom-8.right-8 a[href^="https://wa.me/"]:hover {
+  background: var(--whatsapp-button-hover) !important;
+  box-shadow: 0 6px 16px rgba(29, 168, 81, 0.5) !important;
+  transform: translateY(-2px) !important;
 }
 
 /* ============================================
