@@ -1,20 +1,417 @@
 @import "tailwindcss";
 
+/* ============================================
+   THEME SYSTEM - Default (Dark Pro)
+   ============================================ */
 :root {
-  /* Dark mode by default for "Pro" look */
+  /* Default Dark Pro Theme */
   --background: #050505;
   --foreground: #fafafa;
   --primary: #ffffff;
   --secondary: #a1a1aa;
   --accent: #2563eb;
+  
+  /* Typography */
+  --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  
+  /* Borders */
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.2);
+
+  /* Section & Card Colors */
+  --section-bg: var(--background);
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.1);
+  
+  /* Focus Ring */
+  --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.5);
 }
 
+/* ============================================
+   CARTOON THEME
+   ============================================ */
+[data-theme="cartoon"] {
+  --background: #fef3c7;
+  --foreground: #1f2937;
+  --primary: #f59e0b;
+  --secondary: #6b7280;
+  --accent: #10b981;
+  
+  --font-sans: "Comic Neue", "Chalkboard SE", "Fredoka One", var(--font-geist-sans), Arial, sans-serif;
+  
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --radius-2xl: 2.5rem;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 4px 0 0 #000;
+  --shadow-md: 0 6px 0 0 #000;
+  --shadow-lg: 0 8px 0 0 #000;
+  --shadow-xl: 0 12px 0 0 #000;
+  
+  --border-color: #000;
+  --border-hover: #000;
+
+  --section-bg: var(--background);
+  --card-bg: #ffffff;
+  --card-border: #000000;
+  
+  --focus-ring: 0 0 0 4px #10b981, 0 0 0 6px #10b981;
+}
+
+/* ============================================
+   GLASS AURORA THEME
+   ============================================ */
+[data-theme="glass-aurora"] {
+  --background: rgba(15, 23, 42, 0.7);
+  --foreground: #e2e8f0;
+  --primary: #60a5fa;
+  --secondary: #94a3b8;
+  --accent: #38bdf8;
+  --accent-2: #a78bfa;
+  --accent-hover: #2563eb;
+  --accent-active: #1d4ed8;
+  --accent-foreground: #f0f9ff;
+  --ring: 0 0 0 3px rgba(59, 130, 246, 0.5);
+
+  --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px 0 rgba(255, 255, 255, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(255, 255, 255, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(255, 255, 255, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(255, 255, 255, 0.1);
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  --border-color: rgba(255, 255, 255, 0.2);
+  --border-hover: rgba(255, 255, 255, 0.3);
+
+  /* Glass Aurora Button System */
+  --button-primary-bg: var(--accent);
+  --button-primary-hover: var(--accent-hover);
+  --button-primary-active: var(--accent-active);
+  --button-primary-foreground: var(--accent-foreground);
+  --button-primary-ring: var(--ring);
+
+  --button-secondary-bg: rgba(15, 23, 42, 0.2);
+  --button-secondary-hover: rgba(15, 23, 42, 0.3);
+  --button-secondary-active: rgba(15, 23, 42, 0.4);
+  --button-secondary-foreground: var(--foreground);
+  --button-secondary-border: var(--border-color);
+
+  --section-bg: rgba(15, 23, 42, 0.5);
+  --surface-bg: rgba(15, 23, 42, 0.6);
+  --card-bg: rgba(30, 41, 59, 0.4);
+  --card-border: rgba(148, 163, 184, 0.3);
+
+  --text-primary: #f1f5f9;
+  --text-muted: #cbd5e1;
+
+  --node-bg: rgba(56, 189, 248, 0.2);
+  --node-border: rgba(56, 189, 248, 0.4);
+  --node-text: #f0f9ff;
+
+  --input-bg: rgba(15, 23, 42, 0.6);
+  --input-text: #e2e8f0;
+  --input-placeholder: #94a3b8;
+  --input-border: rgba(148, 163, 184, 0.3);
+
+  /* Glass Aurora Button Tokens */
+  --button-primary-bg: var(--accent);
+  --button-primary-foreground: var(--foreground);
+  --button-primary-hover: #2563eb;
+  --button-primary-active: #1d4ed8;
+  --button-primary-ring: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+/* ============================================
+   DEEP GLASS COMPONENT RECIPE
+   ============================================ */
+
+/* Glass Panel - Section containers */
+.glass-panel {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)),
+    linear-gradient(to bottom, var(--surface-bg), var(--card-bg));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  box-shadow:
+    var(--shadow-xl),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glass Card - For content cards */
+.glass-card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)),
+    var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  box-shadow:
+    var(--shadow-lg),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glass Pill - For inputs and small elements */
+.glass-pill {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)),
+    var(--input-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--input-border);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-full);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glass Button - For primary actions */
+.glass-button {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08)),
+    var(--button-primary-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  color: var(--button-primary-foreground);
+  transition: all 0.3s ease;
+}
+
+.glass-button:hover {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)),
+    var(--button-primary-hover);
+  box-shadow:
+    var(--shadow-lg),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.glass-button:active {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)),
+    var(--button-primary-active);
+  transform: translateY(0);
+}
+
+.glass-button:focus-visible {
+  outline: none;
+  box-shadow:
+    var(--button-primary-ring),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   SPECULAR HIGHLIGHT OVERLAY
+   ============================================ */
+
+/* Specular highlight overlay for glass elements */
+.glass-specular-overlay::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: -1;
+  transform: rotate(30deg);
+  transition: transform 0.3s ease;
+}
+
+.glass-specular-overlay:hover::before {
+  transform: rotate(35deg) translateX(10px);
+  opacity: 0.25;
+}
+
+/* Apply specular overlay to glass elements */
+.glass-card.glass-specular-overlay,
+.glass-button.glass-specular-overlay,
+.glass-panel.glass-specular-overlay {
+  position: relative;
+}
+
+/* ============================================
+   SHIMMER & AURA MICRO-ANIMATIONS
+   ============================================ */
+
+/* Shimmer animation for glass elements */
+.glass-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: none; /* Will be overridden when not reduced motion */
+}
+
+.glass-shimmer:hover::after {
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Slow float animation for cards */
+.glass-float {
+  animation: float 6s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.glass-float:hover {
+  transform: translateY(-4px);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Breathing/scale animation for nodes */
+.glass-breathing {
+  animation: breathing 4s ease-in-out infinite;
+}
+
+@keyframes breathing {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .glass-shimmer::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: opacity 0.01ms !important;
+  }
+
+  .glass-float {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .glass-breathing {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .glass-specular-overlay:hover::before {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Aurora Background Layer for Glass Aurora Theme */
+[data-theme="glass-aurora"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(ellipse at 20% 30%, rgba(56, 189, 248, 0.1) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+              radial-gradient(ellipse at 40% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+  opacity: 0.6;
+}
+
+/* ============================================
+   TAILWIND THEME MAPPING
+   ============================================ */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
+  --color-card: var(--card-bg);
+  --color-card-border: var(--card-border);
+  
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-full: var(--radius-full);
+  
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
 }
 
 html {
@@ -22,14 +419,31 @@ html {
   color-scheme: dark;
 }
 
+[data-theme="cartoon"] html {
+  color-scheme: light;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   antialiased: subpixel-antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Custom scrollbar for Windows */
+/* ============================================
+   THEME-SPECIFIC PATTERNS
+   ============================================ */
+
+/* Cartoon Theme - Polka Dot Pattern */
+[data-theme="cartoon"] body {
+  background-image: radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -39,10 +453,60 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
+  background: var(--border-color);
+  border-radius: var(--radius-md);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--border-hover);
+}
+
+/* ============================================
+   FOCUS STYLES (Accessibility)
+   ============================================ */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ============================================
+   THEME-SPECIFIC ANIMATIONS
+   ============================================ */
+
+/* Cartoon Bounce Animation */
+@keyframes cartoon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+[data-theme="cartoon"] .cartoon-bounce {
+  animation: cartoon-bounce 0.6s ease-in-out;
+}
+
+/* ============================================
+   THEME-SPECIFIC BUTTON STYLES
+   ============================================ */
+
+/* Cartoon Theme Buttons */
+[data-theme="cartoon"] button,
+[data-theme="cartoon"] a[class*="rounded-full"] {
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 0 #000;
+  transition: all 0.15s ease;
+}
+
+[data-theme="cartoon"] button:hover,
+[data-theme="cartoon"] a[class*="rounded-full"]:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 #000;
+}
+
+/* ============================================
+   THEME-SPECIFIC CARD STYLES
+   ============================================ */
+
+/* Cartoon Theme Cards */
+[data-theme="cartoon"] [class*="rounded-2xl"] {
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 0 #000;
 }

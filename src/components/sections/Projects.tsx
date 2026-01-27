@@ -180,7 +180,7 @@ export function Projects() {
       id="projects"
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full py-32 px-6 overflow-hidden min-h-[900px] flex flex-col items-center justify-center bg-[#030303]"
+      className="relative w-full py-32 px-6 overflow-hidden min-h-[900px] flex flex-col items-center justify-center bg-[var(--section-bg)]"
     >
       {/* 1. Deep Space Background - Optimized */}
       <div className="absolute inset-0 z-0">
@@ -212,7 +212,7 @@ export function Projects() {
         viewport={{ once: true }}
         className="text-center z-10 mb-20 relative"
       >
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-4 backdrop-blur-md">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border-color)] bg-[var(--card-bg)] mb-4 backdrop-blur-md glass-specular-overlay">
           <Sparkles size={14} className="text-accent" />
           <span className="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Project Universe</span>
         </div>
@@ -232,16 +232,16 @@ export function Projects() {
         >
           {/* 2. Enhanced Orbits */}
           <div className={cn(
-            "absolute inset-0 rounded-full border border-white/5 transition-opacity duration-300",
+            "absolute inset-0 rounded-full border border-[var(--border-color)] transition-opacity duration-300",
             isPaused ? "opacity-100" : "opacity-40"
           )} />
-          <div className="absolute inset-[100px] rounded-full border border-white/5" />
+          <div className="absolute inset-[100px] rounded-full border border-[var(--border-color)]" />
 
           {/* Energy Rings */}
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 rounded-full border-[1px] border-dashed border-white/10 opacity-20"
+            className="absolute inset-0 rounded-full border-[1px] border-dashed border-[var(--border-color)] opacity-20"
           />
 
           {/* 3. Central Core (The Sun) */}
@@ -249,14 +249,14 @@ export function Projects() {
             style={{ x: mousePos.x, y: mousePos.y }}
             className="absolute z-20 group cursor-pointer"
           >
-            <div className="relative h-28 w-28 rounded-full bg-black border border-white/20 flex items-center justify-center shadow-[0_0_60px_-15px_rgba(255,255,255,0.4)] transition-all duration-500 group-hover:shadow-[0_0_80px_-10px_rgba(37,99,235,0.4)] group-hover:border-accent/50">
+            <div className="relative h-28 w-28 rounded-full bg-[var(--card-bg)] border border-[var(--card-border)] flex items-center justify-center shadow-[0_0_60px_-15px_rgba(255,255,255,0.4)] transition-all duration-500 group-hover:shadow-[0_0_80px_-10px_rgba(37,99,235,0.4)] group-hover:border-accent/50">
               {/* Pulsing Core */}
               <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute inset-0 rounded-full bg-accent/20 blur-xl"
               />
-              <Cpu className="text-white relative z-10" size={42} />
+              <Cpu className="text-[var(--text-primary)] relative z-10" size={42} />
             </div>
           </motion.div>
 
@@ -286,9 +286,9 @@ export function Projects() {
                       onClick={() => window.open(project.link, "_blank")}
                       onMouseEnter={() => setActiveProject(project.id)}
                       className={cn(
-                        "h-20 w-20 rounded-2xl border backdrop-blur-xl flex items-center justify-center transition-all duration-300 shadow-xl",
+                        "h-20 w-20 rounded-2xl border backdrop-blur-xl flex items-center justify-center transition-all duration-300 shadow-xl glass-specular-overlay glass-shimmer",
                         project.color,
-                        activeProject === project.id ? "border-white bg-black z-50 ring-4 ring-white/10" : "bg-black/40 border-white/10"
+                        activeProject === project.id ? "border-[var(--card-border)] bg-[var(--card-bg)] z-50 ring-4 ring-[var(--ring)]" : "bg-[var(--card-bg)]/40 border-[var(--card-border)]/10"
                       )}
                     >
                       <div className="relative">
@@ -298,7 +298,9 @@ export function Projects() {
                             className="absolute -inset-4 bg-inherit blur-xl opacity-50 -z-10"
                           />
                         )}
-                        {project.icon}
+                        <div className="text-[var(--node-text)] drop-shadow-[0_1px_0_rgba(0,0,0,0.2)]">
+                          {project.icon}
+                        </div>
                       </div>
                     </motion.button>
                   </motion.div>
@@ -315,7 +317,7 @@ export function Projects() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 10 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="absolute z-40 w-96 p-8 rounded-3xl bg-black/90 backdrop-blur-2xl border border-white/20 text-center shadow-2xl"
+                className="absolute z-40 w-96 p-8 rounded-3xl bg-[var(--card-bg)]/90 backdrop-blur-2xl border border-[var(--card-border)]/20 text-center shadow-2xl glass-panel glass-specular-overlay"
               >
                 {(() => {
                   const p = projects.find(p => p.id === activeProject);
@@ -332,27 +334,27 @@ export function Projects() {
                           {p.icon}
                         </div>
                       </motion.div>
-                      <h3 className="text-2xl font-bold text-white mb-3">{p.title}</h3>
+                      <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-3">{p.title}</h3>
                       <p className="text-sm text-secondary leading-relaxed mb-6">{p.description}</p>
 
                       {/* Case Study Section */}
-                      <div className="text-left bg-white/5 rounded-xl p-4 mb-6">
-                        <div className="flex items-center gap-2 text-xs font-semibold text-accent mb-3">
+                      <div className="text-left bg-[var(--card-bg)]/5 rounded-xl p-4 mb-6 glass-card">
+                        <div className="flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)] mb-3">
                           <ChevronDown size={14} />
                           <span>Case Study</span>
                         </div>
                         <div className="space-y-2 text-sm">
                           <div>
                             <span className="text-secondary">Problem:</span>
-                            <p className="text-white font-medium">{p.caseStudy.problem}</p>
+                            <p className="text-[var(--text-primary)] font-medium">{p.caseStudy.problem}</p>
                           </div>
                           <div>
                             <span className="text-secondary">Solution:</span>
-                            <p className="text-white font-medium">{p.caseStudy.solution}</p>
+                            <p className="text-[var(--text-primary)] font-medium">{p.caseStudy.solution}</p>
                           </div>
                           <div>
                             <span className="text-secondary">Result:</span>
-                            <p className="text-white font-medium">{p.caseStudy.result}</p>
+                            <p className="text-[var(--text-primary)] font-medium">{p.caseStudy.result}</p>
                           </div>
                         </div>
                       </div>
@@ -366,7 +368,7 @@ export function Projects() {
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                           transition={{ duration: 0.15 }}
-                          className="flex items-center gap-2 px-6 py-2 rounded-full bg-accent text-white text-sm font-medium"
+                          className="flex items-center gap-2 px-6 py-2 rounded-full bg-[var(--accent)] text-[var(--text-primary)] text-sm font-medium glass-button glass-specular-overlay"
                         >
                           <ExternalLink size={14} />
                           Live Demo
@@ -389,13 +391,15 @@ export function Projects() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.05, duration: 0.3, ease: "easeOut" }}
               className={cn(
-                "group p-6 rounded-2xl border bg-black/40 backdrop-blur-md transition-all duration-300 border-white/10 hover:border-white/30",
+                "group p-6 rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)]/40 backdrop-blur-md transition-all duration-300 border-[var(--card-border)]/10 hover:border-[var(--card-border)]/30 glass-specular-overlay",
                 project.color
               )}
             >
               <div className="flex items-center gap-5 mb-4">
-                <div className="p-4 rounded-xl bg-black/60 group-hover:scale-110 transition-transform">
-                  {project.icon}
+                <div className="p-4 rounded-xl bg-[var(--card-bg)]/60 group-hover:scale-110 transition-transform">
+                  <div className="text-[var(--node-text)] drop-shadow-[0_1px_0_rgba(0,0,0,0.2)]">
+                    {project.icon}
+                  </div>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold">{project.title}</h3>
@@ -404,7 +408,7 @@ export function Projects() {
               </div>
 
               {/* Mobile Case Study */}
-              <div className="bg-white/5 rounded-xl p-3 mb-4">
+              <div className="bg-white/5 rounded-xl p-3 mb-4 glass-card">
                 <div className="flex items-center gap-2 text-xs font-semibold text-accent mb-2">
                   <ChevronDown size={12} />
                   <span>Case Study</span>
@@ -412,15 +416,15 @@ export function Projects() {
                 <div className="space-y-1 text-xs">
                   <div>
                     <span className="text-secondary">Problem:</span>
-                    <p className="text-white font-medium">{project.caseStudy.problem}</p>
+                    <p className="text-[var(--text-primary)] font-medium">{project.caseStudy.problem}</p>
                   </div>
                   <div>
                     <span className="text-secondary">Solution:</span>
-                    <p className="text-white font-medium">{project.caseStudy.solution}</p>
+                    <p className="text-[var(--text-primary)] font-medium">{project.caseStudy.solution}</p>
                   </div>
                   <div>
                     <span className="text-secondary">Result:</span>
-                    <p className="text-white font-medium">{project.caseStudy.result}</p>
+                    <p className="text-[var(--text-primary)] font-medium">{project.caseStudy.result}</p>
                   </div>
                 </div>
               </div>
@@ -434,7 +438,7 @@ export function Projects() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ duration: 0.15 }}
-                  className="flex items-center gap-2 px-3 py-2 rounded-full bg-accent text-white text-xs font-medium flex-1 justify-center"
+                  className="flex items-center gap-2 px-3 py-2 rounded-full bg-[var(--accent)] text-[var(--text-primary)] text-xs font-medium flex-1 justify-center glass-button glass-specular-overlay"
                 >
                   <ExternalLink size={12} />
                   Live Demo

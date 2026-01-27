@@ -39,7 +39,7 @@ export function Contact() {
               rel="noopener noreferrer"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 rounded-full bg-green-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-600 shadow-lg shadow-green-500/25"
+              className="flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--text-primary)] transition-colors hover:bg-[var(--accent)]/80 shadow-lg shadow-[var(--accent)]/25 glass-button glass-specular-overlay"
             >
               <MessageCircle size={18} />
               WhatsApp Me
@@ -50,7 +50,7 @@ export function Contact() {
               href={`mailto:${CONTACT.email}`}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white/40 hover:bg-white/10"
+              className="flex items-center gap-2 rounded-full border border-[var(--border-color)] bg-[var(--card-bg)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition-colors hover:border-[var(--border-hover)] hover:bg-[var(--card-bg)] glass-button glass-specular-overlay"
             >
               <Mail size={18} />
               {CONTACT.email}
@@ -67,7 +67,7 @@ export function Contact() {
                 key={i}
                 href={social.href}
                 whileHover={{ y: -4 }}
-                className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-secondary hover:text-white hover:border-white/20 transition-colors"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border-color)]/10 bg-[var(--card-bg)]/5 text-secondary hover:text-[var(--text-primary)] hover:border-[var(--border-color)]/20 transition-colors glass-button"
               >
                 {social.icon}
               </motion.a>

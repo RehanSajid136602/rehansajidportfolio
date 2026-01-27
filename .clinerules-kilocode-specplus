@@ -1,0 +1,8 @@
+# SpecKit Plus Configuration for KiloCode
+# This file enables SpecKit Plus commands for KiloCode
+
+include: kilocode.md
+# This file enables SpecKit Plus commands for KiloCode
+
+include: kilocode.md
+

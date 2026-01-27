@@ -95,7 +95,7 @@ const NeuralConnection = memo(({
         y1={from.y}
         x2={to.x}
         y2={to.y}
-        stroke="white"
+        stroke="var(--foreground)"
         strokeWidth={isHighlighted ? 2 : 1}
         initial={{ opacity: 0.1 }}
         animate={{ 
@@ -107,7 +107,7 @@ const NeuralConnection = memo(({
       {(isHighlighted || !isActive) && (
         <motion.circle
           r={3}
-          fill="white"
+          fill="var(--foreground)"
           initial={{ opacity: 0 }}
           animate={{
             opacity: [0, 0.8, 0],
@@ -188,9 +188,9 @@ const NeuralNode = memo(({
         cx={position.x}
         cy={position.y}
         r={size / 2}
-        fill="#0a0a0a"
+        fill="var(--background)"
         stroke={colors.primary}
-        strokeWidth={isSelected ? 3 : 2}
+        strokeWidth={2}
         initial={{ scale: 0, opacity: 0 }}
         animate={isInView ? { 
           scale: isSelected ? 1.15 : 1,
@@ -199,13 +199,29 @@ const NeuralNode = memo(({
           scale: 0,
           opacity: 0,
         }}
-        whileHover={isInView ? { scale: 1.1 } : {}}
+        whileHover={isInView ? { 
+          scale: 1.1,
+          rotate: [0, -2, 2, 0],
+          transition: { duration: 0.3 }
+        } : {}}
         transition={{ 
           type: "spring", 
           stiffness: 400, 
           damping: 15,
           delay: isInView ? animationIndex * 0.08 : reverseAnimationIndex * 0.05,
         }}
+        style={{ filter: "drop-shadow(0 4px 4px rgba(0,0,0,0.2))" }}
+      />
+      
+      {/* Glossy highlight */}
+      <motion.circle
+        cx={position.x - size/6}
+        cy={position.y - size/6}
+        r={size / 6}
+        fill="white"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: dimmed ? 0.05 : 0.15 } : { opacity: 0 }}
+        style={{ pointerEvents: "none" }}
       />
       
       {skill.name.length > 10 ? (
@@ -215,7 +231,7 @@ const NeuralNode = memo(({
             y={position.y - 6}
             textAnchor="middle"
             dominantBaseline="middle"
-            fill="white"
+            fill="var(--foreground)"
             fontSize={8}
             fontWeight={600}
             style={{ pointerEvents: "none", userSelect: "none" }}
@@ -233,7 +249,7 @@ const NeuralNode = memo(({
             y={position.y + 6}
             textAnchor="middle"
             dominantBaseline="middle"
-            fill="white"
+            fill="var(--foreground)"
             fontSize={8}
             fontWeight={600}
             style={{ pointerEvents: "none", userSelect: "none" }}
@@ -253,7 +269,7 @@ const NeuralNode = memo(({
           y={position.y}
           textAnchor="middle"
           dominantBaseline="middle"
-          fill="white"
+          fill="var(--foreground)"
           fontSize={skill.name.length > 8 ? 9 : 11}
           fontWeight={600}
           style={{ pointerEvents: "none", userSelect: "none" }}
@@ -456,7 +472,7 @@ function SkillsComponent() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
-                className="absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-4 rounded-2xl bg-black/80 backdrop-blur-xl border border-white/10 text-center min-w-[200px]"
+                className="absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-4 rounded-2xl bg-card/80 backdrop-blur-xl border border-card-border text-center min-w-[200px]"
               >
                 <div 
                   className="text-lg font-bold mb-1"
@@ -493,7 +509,7 @@ function SkillsComponent() {
             <motion.div
               key={skill.id}
               whileTap={{ scale: 0.95 }}
-              className="p-3 rounded-xl bg-white/5 border border-white/10 text-center"
+              className="p-3 rounded-xl bg-card border border-card-border text-center"
               style={{ borderColor: `${categoryColors[skill.category].primary}30` }}
             >
               <div className="text-xs font-medium">{skill.name}</div>

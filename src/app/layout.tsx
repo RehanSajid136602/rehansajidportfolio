@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CursorStardust } from "@/components/effects/CursorStardust";
 import { StickyWhatsApp } from "@/components/ui/StickyWhatsApp";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,6 +47,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
       >
+        <ThemeToggle />
         <CursorStardust />
         {children}
         <StickyWhatsApp />

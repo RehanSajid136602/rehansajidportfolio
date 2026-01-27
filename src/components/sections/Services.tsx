@@ -43,11 +43,11 @@ export function Services() {
                     : "bg-gradient-to-r from-accent/20 to-purple-500/20"
                 }`} 
               />
-              <div 
-                className={`relative bg-black/40 backdrop-blur-xl border rounded-2xl p-8 h-full transition-all duration-300 ${
+              <div
+                className={`relative glass-card backdrop-blur-xl border rounded-2xl p-8 h-full transition-all duration-300 glass-specular-overlay ${
                   service.title === "Custom Website"
-                    ? "border-purple-400/40 shadow-purple-500/30 hover:border-purple-400/60"
-                    : "border-white/10 hover:border-white/20"
+                    ? "border-purple-400/40 hover:border-purple-400/60"
+                    : "border-card-border hover:border-white/20"
                 }`}
               >
                 <div className="text-center mb-6">
@@ -64,7 +64,7 @@ export function Services() {
                       )}
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{service.title}</h3>
+                  <h3 className="text-2xl font-bold text-foreground mb-2">{service.title}</h3>
                   <div className={`text-3xl font-bold ${
                     service.title === "Custom Website" ? "text-purple-400" : "text-accent"
                   }`}>{service.price}</div>
@@ -85,7 +85,7 @@ export function Services() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center justify-center gap-2 rounded-full bg-green-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-600 shadow-lg shadow-green-500/25"
+                  className="w-full flex items-center justify-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-6 py-3 text-sm font-semibold text-[var(--button-primary-foreground)] transition-colors hover:bg-[var(--button-primary-hover)] glass-button glass-specular-overlay glass-shimmer"
                 >
                   <MessageCircle size={16} />
                   Get Started

@@ -63,9 +63,9 @@ export function RocketButton({ email }: RocketButtonProps) {
     <button
       onClick={handleLaunch}
       disabled={status === "launching"}
-      className="group relative flex items-center gap-4 rounded-full bg-white px-8 py-4 text-lg font-semibold text-black transition-all hover:bg-zinc-200 disabled:cursor-not-allowed min-w-[280px] justify-center"
+      className="group relative flex items-center gap-4 rounded-full bg-[var(--button-primary-bg)] px-8 py-4 text-lg font-semibold text-[var(--button-primary-foreground)] transition-all hover:bg-[var(--button-primary-hover)] disabled:cursor-not-allowed min-w-[280px] justify-center glass-button"
     >
-      <span className={status === "success" ? "text-emerald-600 flex items-center gap-2" : "flex items-center gap-2"}>
+      <span className={status === "success" ? "text-[var(--accent)] flex items-center gap-2" : "flex items-center gap-2"}>
         {status === "success" ? (
           <>
             <Check size={20} />
@@ -83,7 +83,7 @@ export function RocketButton({ email }: RocketButtonProps) {
         >
           <Rocket 
             size={20} 
-            className={`${status === "launching" ? "text-blue-600" : "opacity-50 group-hover:opacity-100 group-hover:text-blue-600 transition-colors"}`} 
+            className={`${status === "launching" ? "text-[var(--accent)]" : "opacity-50 group-hover:opacity-100 group-hover:text-[var(--accent)] transition-colors"}`}
           />
         </motion.div>
       )}
@@ -94,7 +94,7 @@ export function RocketButton({ email }: RocketButtonProps) {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: [0, 1, 0], scale: [1, 2.5, 0.5], y: [0, 20, 40] }}
           transition={{ duration: 0.6 }}
-          className="absolute bottom-4 right-12 -z-10 h-4 w-4 rounded-full bg-blue-400 blur-md"
+          className="absolute bottom-4 right-12 -z-10 h-4 w-4 rounded-full bg-[var(--accent)] blur-md"
         />
       )}
     </button>

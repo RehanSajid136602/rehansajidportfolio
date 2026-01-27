@@ -1,4 +1,4 @@
-AGENTS.md
+﻿AGENTS.md
 
 Overview
 - This file provides centralized guidance for agentic coding tasks within this repository. It covers build, lint, test workflows, code style conventions, error handling, and naming. It also documents any repository-specific Cursor/Copilot rules and the expected approval/workflow patterns.

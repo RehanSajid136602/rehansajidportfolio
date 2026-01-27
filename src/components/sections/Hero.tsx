@@ -50,7 +50,7 @@ function HeroComponent() {
             rel="noopener noreferrer"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 rounded-full bg-green-500 px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-green-600 shadow-lg shadow-green-500/25"
+            className="flex items-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-8 py-4 text-sm font-semibold text-[var(--button-primary-foreground)] transition-colors hover:bg-[var(--button-primary-hover)] shadow-lg shadow-[var(--button-primary-bg)]/25 glass-button glass-specular-overlay glass-shimmer"
           >
             <MessageCircle size={18} />
             WhatsApp Me
@@ -60,7 +60,7 @@ function HeroComponent() {
             href="#contact"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-black transition-colors hover:bg-zinc-200"
+            className="flex items-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-8 py-4 text-sm font-semibold text-[var(--button-primary-foreground)] transition-colors hover:bg-[var(--button-primary-hover)] glass-button glass-specular-overlay glass-shimmer"
           >
             <Zap size={18} />
             Get a Free 24h Demo
@@ -72,7 +72,7 @@ function HeroComponent() {
             href="#projects"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-medium text-secondary transition-colors hover:border-white/40 hover:text-white"
+            className="flex items-center gap-2 rounded-full border border-[var(--card-border)] px-6 py-3 text-sm font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--border-hover)] glass-button glass-specular-overlay"
           >
             View My Work
             <ArrowRight size={18} />

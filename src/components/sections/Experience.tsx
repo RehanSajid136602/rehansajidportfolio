@@ -191,10 +191,11 @@ function MissionCard({
         onClick={onToggle}
         className={cn(
           "relative p-6 rounded-2xl cursor-pointer transition-colors duration-300",
-          "bg-white/[0.03] backdrop-blur-xl border border-white/10",
-          "hover:border-white/20 hover:bg-white/[0.05]",
-          isExpanded && "border-white/30 bg-white/[0.06]",
-          mission.status === "ACTIVE" && "border-green-500/30 bg-green-500/[0.03]"
+          "glass-card backdrop-blur-xl border border-[var(--card-border)]/10",
+          "hover:border-[var(--border-hover)]/20 hover:bg-[var(--card-bg)]/[0.05]",
+          isExpanded && "border-[var(--card-border)]/30 bg-[var(--card-bg)]/[0.06]",
+          mission.status === "ACTIVE" && "border-green-500/30 bg-green-500/[0.03]",
+          "glass-specular-overlay"
         )}
         style={{
           boxShadow: mission.status === "ACTIVE" 
@@ -388,7 +389,7 @@ export function Experience() {
     <section 
       id="experience" 
       ref={containerRef}
-      className="w-full py-24 px-6 overflow-hidden bg-[#030303]"
+      className="w-full py-24 px-6 overflow-hidden bg-[var(--section-bg)]"
     >
       <div className="max-w-7xl mx-auto">
         {/* Mission Control Header */}
@@ -416,7 +417,7 @@ export function Experience() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.3 }}
-            className="flex gap-8 mt-8 p-4 rounded-xl bg-white/[0.02] border border-white/5 w-fit"
+            className="flex gap-8 mt-8 p-4 rounded-xl bg-[var(--card-bg)]/[0.02] border border-[var(--card-border)]/5 w-fit glass-panel"
           >
             <div className="text-center">
               <div className="text-2xl font-bold text-accent">{completedMissions}</div>
@@ -457,13 +458,13 @@ export function Experience() {
           <div className="flex gap-2">
             <button
               onClick={() => scroll("left")}
-              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+              className="p-2 rounded-lg bg-[var(--card-bg)]/5 hover:bg-[var(--card-bg)]/10 transition-colors glass-button"
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={() => scroll("right")}
-              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+              className="p-2 rounded-lg bg-[var(--card-bg)]/5 hover:bg-[var(--card-bg)]/10 transition-colors glass-button"
             >
               <ChevronRight size={20} />
             </button>
