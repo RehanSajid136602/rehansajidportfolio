@@ -18,7 +18,7 @@ export function StickyWhatsApp() {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.95 }}
-        className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-green-500 text-white shadow-lg shadow-green-500/25 hover:shadow-green-500/40 transition-all duration-300"
+        className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--accent)] text-white shadow-lg shadow-[var(--accent)]/25 hover:shadow-[var(--accent)]/40 transition-all duration-300 glass-button glass-specular-overlay"
         aria-label="Contact on WhatsApp"
         style={{ width: '48px', height: '48px' }}
       >
