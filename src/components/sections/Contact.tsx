@@ -7,6 +7,14 @@ import { RocketButton } from "@/components/ui/RocketButton";
 import { CONTACT } from "@/lib/constants";
 
 export function Contact() {
+  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONTACT.email)}`;
+  const mailtoUrl = `mailto:${CONTACT.email}`;
+  const isMobileDevice =
+    typeof navigator !== "undefined" &&
+    /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const emailHref = isMobileDevice ? mailtoUrl : gmailComposeUrl;
+  const isGmailCompose = emailHref === gmailComposeUrl;
+
   return (
     <section id="contact" className="w-full max-w-5xl py-32 px-6 mx-auto">
       <motion.div
@@ -47,7 +55,9 @@ export function Contact() {
 
             {/* Email Button */}
             <motion.a
-              href={`mailto:${CONTACT.email}`}
+              href={emailHref}
+              target={isGmailCompose ? "_blank" : undefined}
+              rel={isGmailCompose ? "noopener noreferrer" : undefined}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
               className="flex items-center gap-2 rounded-full border border-[var(--border-color)] bg-[var(--card-bg)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition-colors hover:border-[var(--border-hover)] hover:bg-[var(--card-bg)] glass-button glass-specular-overlay"
