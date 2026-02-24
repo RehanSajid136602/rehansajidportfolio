@@ -102,6 +102,22 @@ const projects = [
       result: "Streamlined workflow + multi-platform scheduling"
     }
   },
+  {
+    id: 7,
+    title: "Chief",
+    description: "Recipe finder website.",
+    icon: <Utensils className="text-yellow-400" size={24} />,
+    color: "bg-yellow-500/10 border-yellow-400/40 shadow-yellow-500/20",
+    link: "https://github.com/RehanSajid136602/chief",
+    github: "https://github.com/RehanSajid136602/chief",
+    orbit: 240,
+    speed: 35,
+    caseStudy: {
+      problem: "Home cooks struggled to find recipes matching ingredients on hand",
+      solution: "Built a fast recipe finder with ingredient-based search and filtering",
+      result: "Helped users discover meals faster with fewer wasted ingredients"
+    }
+  },
 ];
 
 export function Projects() {
